@@ -1,0 +1,32 @@
+对于指针的赋值，*p = i的赋值方式不能把p指向i的地址，当i改变是，*p不会跟着改变
+使用p = i的赋值方式才真正把p指向i
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  //方式一,赋值使用*p = i的方式，结果是*p和i互不影响
+  //类似与函数参数的值传递，在赋值时先把i赋值给一个临时变量，
+  //再把这个临时变量赋值给*p,p实际指向的是这个临时变量的地址
+	int i = 0;
+	int *p;
+	*p = i;
+  i = 1;
+  cout<<*p<<endl;
+  *p = 3;
+  cout<<i<<endl;
+  cout<<"*p的地址"<<p<<endl;//两者地址不一致，p并没有指向i的地址
+  cout<<"i的地址"<<&i<<endl;
+  //方式二,没有通过临时变量，所以两者会同时发生改变
+	int k = 0;
+  int *p1;
+  p1 = &k;
+	cout<<*p1<<endl;
+  k = 1;
+  cout<<*p1<<endl;
+  *p1 = 3;
+  cout<<k<<endl;\
+  cout<<"*p的地址"<<p<<endl;//两者地址一致
+  cout<<"i的地址"<<&i<<endl;
+}
